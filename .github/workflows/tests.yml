@@ -27,7 +27,7 @@ jobs:
           devpi-server &
           sleep 10
           devpi use http://localhost:3141
-          devpi user -v testuser password=123
+          devpi user -c testuser password=123
           devpi login testuser --password=123
           devpi index -c dev based=root/pypi
           devpi use testuser/dev
