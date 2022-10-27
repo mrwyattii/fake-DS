@@ -20,9 +20,28 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
+      - name: Setup devpi repo
+        run: |
+          pip install devpi devpi-server
+          devpi-init
+          devpi-server &
+          sleep 10
+          devpi use http://localhost:3141
+          devpi user -v testuser password=123
+          devpi login testuser --password=123
+          devpi index -c dev based=root/pypi
+          devpi use testuser/dev
+
+      - name: Add MII to devpi repo
+        run: |
+          git clone https://github.com/mrwyattii/fake-MII.git
+          cd ./fake-MII
+          devpi upload
+          cd ..
+
       - name: Install deepspeed
         run: |
-          pip install .
+          devpi install .
 
       - name: Run tests
         run: |
