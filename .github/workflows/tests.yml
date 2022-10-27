@@ -1,0 +1,30 @@
+name: UnitTests
+
+on:
+  push:
+    branches:
+      - 'develop'
+  pull_request:
+    branches:
+      '**'
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+
+  unit-tests:
+    runs-on: ubuntu-20.04
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install deepspeed
+        run: |
+          pip install .
+
+      - name: Run tests
+        run: |
+           cd tests
+           pytest ./

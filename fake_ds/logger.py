@@ -1,0 +1,2 @@
+class logger(object):
+    pass
