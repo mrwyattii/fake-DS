@@ -29,7 +29,7 @@ jobs:
           devpi use http://localhost:3141
           devpi user -c testuser password=123
           devpi login testuser --password=123
-          devpi index -c dev based=root/pypi
+          devpi index -c dev bases=root/pypi
           devpi use testuser/dev
 
       - name: Add MII to devpi repo
