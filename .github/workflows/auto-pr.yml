@@ -1,0 +1,28 @@
+name: UnitTests
+
+on:
+  push:
+    branches:
+      - 'develop'
+
+jobs:
+
+  Create-PR:
+    runs-on: ubuntu-20.04
+
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          token: ${{ secrets.INTERNAL_TOKEN }}
+          repository: mrwyattii/fake-DS-internal
+          ref: develop
+          path: internal-repo
+
+      - run: |
+        git fetch https://github.com/mrwyattii/fake-DS.git develop && git cherry-pick FETCH_HEAD --strategy-option theirs
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v2
+        with:
+          path: interal-repo
+          token: ${{ secrets.INTERNAL_TOKEN }}
