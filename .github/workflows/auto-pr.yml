@@ -20,6 +20,7 @@ jobs:
 
       - name: cherry pick commit
         run: |
+          cd internal-repo
           git fetch https://github.com/mrwyattii/fake-DS.git develop && git cherry-pick FETCH_HEAD --strategy-option theirs
 
       - name: Create Pull Request
