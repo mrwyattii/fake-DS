@@ -12,3 +12,5 @@ setup(name="fake_ds",
       install_requires=install_requires,
       packages=find_packages(),
       )
+
+fake_val = False
