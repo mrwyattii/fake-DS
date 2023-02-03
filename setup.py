@@ -14,7 +14,9 @@ setup(name="fake_ds",
       )
 
 def public_func():
-    pass
+    for i in range(10):
+        print("blah")
+    return False
 
 fake_val = 1e20
 new_val = 100
