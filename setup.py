@@ -14,3 +14,4 @@ setup(name="fake_ds",
       )
 
 fake_val = 42
+new_val = 0
