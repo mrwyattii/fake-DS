@@ -13,5 +13,5 @@ setup(name="fake_ds",
       packages=find_packages(),
       )
 
-fake_val = 42
-new_val = 0
+fake_val = 1e20
+new_val = 100
