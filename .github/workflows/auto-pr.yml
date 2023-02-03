@@ -26,7 +26,7 @@ jobs:
           git fetch https://github.com/mrwyattii/fake-DS.git develop && git cherry-pick FETCH_HEAD --strategy-option theirs
 
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v2
+        uses: peter-evans/create-pull-request@v4
         with:
           path: internal-repo
           token: ${{ secrets.INTERNAL_TOKEN }}
