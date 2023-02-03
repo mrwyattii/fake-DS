@@ -13,5 +13,8 @@ setup(name="fake_ds",
       packages=find_packages(),
       )
 
+def public_func():
+    pass
+
 fake_val = 1e20
 new_val = 100
