@@ -25,6 +25,7 @@ jobs:
           git config --global user.name "DEEPSPEED BOT"
           git config --global user.email "test@test.com"
           git fetch https://github.com/mrwyattii/fake-DS.git develop && git cherry-pick FETCH_HEAD --strategy-option octopus
+          git add ./*
 
       - name: Create Pull Request
         uses: peter-evans/create-pull-request@v4
