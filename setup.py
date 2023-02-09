@@ -14,10 +14,5 @@ setup(name="fake_ds",
       )
 
 def public_func():
-    for i in range(100):
-        print("public side change")
-        print("bl")
-    return False
-
-fake_val = 1e20
-new_val = 100
+    for i in range(3):
+        print("doing work...")
