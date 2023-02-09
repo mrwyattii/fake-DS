@@ -19,6 +19,7 @@ jobs:
           path: internal-repo
 
       - name: cherry pick commit
+        continue-on-error: true
         run: |
           cd internal-repo
           git config --global user.name "DEEPSPEED BOT"
