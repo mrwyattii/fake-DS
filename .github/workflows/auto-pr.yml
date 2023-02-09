@@ -29,6 +29,7 @@ jobs:
       - name: add modified files
         run: |
           cd internal-repo
+          git add ./.*
           git add ./*
 
       - name: Create Pull Request
