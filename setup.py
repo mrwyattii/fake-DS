@@ -14,5 +14,5 @@ setup(name="fake_ds",
       )
 
 def public_func():
-    for i in range(3):
+    for i in range(10):
         print("doing work...")
