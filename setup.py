@@ -16,3 +16,4 @@ setup(name="fake_ds",
 def public_func():
     for i in range(3):
         print("doing work...")
+        print("doing more work...")
