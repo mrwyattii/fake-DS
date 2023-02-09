@@ -17,3 +17,6 @@ def public_func():
     for i in range(3):
         print("doing work...")
         print("doing more work...")
+
+def public_func_2():
+    pass
