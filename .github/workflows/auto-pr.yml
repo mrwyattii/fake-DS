@@ -50,7 +50,8 @@ jobs:
           path: internal-repo
           token: ${{ secrets.INTERNAL_TOKEN }}
           body: |
-            AutoPR generated from ${{ env.REPO }}
+            **Auto-generate PR**
+            Repo    - [${{ env.REPO }}](https://github.com/${{ env.REPO }})
             PR name - ${{ env.PR_NAME }}
             Commit  - ${{ env.REPO }}@${{ env.COMMIT_SHA }}
             Author  - @${{ env.USERNAME }}
