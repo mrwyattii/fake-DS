@@ -54,4 +54,4 @@ jobs:
           assignees: ${{ env.USERNAME }}
           title: ${{ env.PR_NAME }}
           labels: AutoPR
-          author: ${{ env.USERNAME }}
+          author: ${{ env.USERNAME }} <${{ env.USERNAME }}@users.noreply.github.com>
