@@ -20,4 +20,4 @@ def public_func():
 def public_func_2():
     pass
 
-x = 42
+y = 10
