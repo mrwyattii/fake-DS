@@ -28,7 +28,7 @@ jobs:
           echo "SHORT_SHA=$(echo ${{ github.event.after }} | cut -c1-8)" >> $GITHUB_ENV
           echo "USERNAME=${{ github.event.head_commit.author.username }}" >> $GITHUB_ENV
           echo "USER_EMAIL=${{ github.event.head_commit.author.username }}@users.noreply.github.com" >> $GITHUB_ENV
-           echo "PR_NAME=$(echo '${{ github.event.head_commit.message }}' | head -1 | sed 's|#|${{ github.repository }}#|g')" >> $GITHUB_ENV
+          echo "PR_NAME=$(echo '${{ github.event.head_commit.message }}' | head -1 | sed 's|#|${{ github.repository }}#|g')" >> $GITHUB_ENV
 
       - name: cherry pick commit
         continue-on-error: true
