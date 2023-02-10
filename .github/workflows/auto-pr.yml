@@ -21,7 +21,7 @@ jobs:
       - name: cherry pick commit
         continue-on-error: true
         run: |
-          echo ${{ github.event }}
+          echo ${{ github.event_name }}
           cd internal-repo
           git config --global user.name "DEEPSPEED BOT"
           git config --global user.email "test@test.com"
