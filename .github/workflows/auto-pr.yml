@@ -24,7 +24,7 @@ jobs:
       - name: Extract data
         run: |
           echo "REPO=${{ github.repository }}" >> $GITHUB_ENV
-          echo "COMMIT_LINK=${{ github.event.after }}" >> $GITHUB_ENV
+          echo "COMMIT_SHA=${{ github.event.after }}" >> $GITHUB_ENV
           echo "USERNAME=${{ github.event.head_commit.author.username }}" >> $GITHUB_ENV
           echo "USER_EMAIL=${{ env.USERNAME }}@users.noreply.github.com" >> $GITHUB_ENV
           echo "PR_NAME=$(echo '${{ github.event.head_commit.message }}' | head -1)" >> $GITHUB_ENV
