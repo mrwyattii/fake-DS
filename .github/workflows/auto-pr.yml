@@ -18,10 +18,12 @@ jobs:
           ref: develop
           path: internal-repo
 
+      - name: Dump context
+        uses: crazy-max/ghaction-dump-context@v1
+
       - name: cherry pick commit
         continue-on-error: true
         run: |
-          echo ${{ github.event_name }}
           cd internal-repo
           git config --global user.name "DEEPSPEED BOT"
           git config --global user.email "test@test.com"
