@@ -25,9 +25,9 @@ jobs:
         run: |
           echo "REPO=${{ github.repository }}" >> $GITHUB_ENV
           echo "COMMIT_SHA=${{ github.event.after }}" >> $GITHUB_ENV
-          echo "SHORT_SHA=$(echo ${{ env.COMMIT_SHA }} | cut -c1-8)" >> $GITHUB_ENV
+          echo "SHORT_SHA=$(echo ${{ github.event.after }} | cut -c1-8)" >> $GITHUB_ENV
           echo "USERNAME=${{ github.event.head_commit.author.username }}" >> $GITHUB_ENV
-          echo "USER_EMAIL=${{ env.USERNAME }}@users.noreply.github.com" >> $GITHUB_ENV
+          echo "USER_EMAIL=${{ github.event.head_commit.author.username }}@users.noreply.github.com" >> $GITHUB_ENV
           echo "PR_NAME=$(echo '${{ github.event.head_commit.message }}' | head -1)" >> $GITHUB_ENV
 
       - name: cherry pick commit
