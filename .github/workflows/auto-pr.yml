@@ -47,11 +47,11 @@ jobs:
           token: ${{ secrets.INTERNAL_TOKEN }}
           body: |
             AutoPR generated from public repo
-            $COMMIT_SHA
-            @$USERNAME
-          branch: AutoPR/$PR_NAME
+            ${{ env.COMMIT_SHA }}
+            @${{ env.USERNAME }}
+          branch: AutoPR/${{ env.PR_NAME }}
           branch-suffix: short-commit-hash
-          assignees: $USERNAME
-          title: $PR_NAME
+          assignees: ${{ env.USERNAME }}
+          title: ${{ env.PR_NAME }}
           labels: AutoPR
-          author: $USERNAME
+          author: ${{ env.USERNAME }}
