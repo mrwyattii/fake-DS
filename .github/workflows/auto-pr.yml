@@ -49,7 +49,7 @@ jobs:
             AutoPR generated from public repo
             ${{ env.COMMIT_SHA }}
             @${{ env.USERNAME }}
-          branch: AutoPR/${{ env.PR_NAME }}
+          branch: AutoPR
           branch-suffix: short-commit-hash
           assignees: ${{ env.USERNAME }}
           title: ${{ env.PR_NAME }}
