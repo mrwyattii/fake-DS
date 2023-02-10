@@ -23,17 +23,20 @@ jobs:
 
       - name: Extract data
         run: |
-          echo "COMMIT_SHA=${{ github.event.after }}" >> $GITHUB_ENV
+          echo "REPO=${{ github.repository }}" >> $GITHUB_ENV
+          echo "COMMIT_LINK=${{ github.event.after }}" >> $GITHUB_ENV
           echo "USERNAME=${{ github.event.head_commit.author.username }}" >> $GITHUB_ENV
+          echo "USER_EMAIL=${{ env.USERNAME }}@users.noreply.github.com" >> $GITHUB_ENV
           echo "PR_NAME=$(echo '${{ github.event.head_commit.message }}' | head -1)" >> $GITHUB_ENV
 
       - name: cherry pick commit
         continue-on-error: true
         run: |
           cd internal-repo
-          git config --global user.name "DEEPSPEED BOT"
-          git config --global user.email "test@test.com"
-          git fetch https://github.com/mrwyattii/fake-DS.git develop && git cherry-pick FETCH_HEAD --strategy-option octopus
+          git config --global user.name ${{ env.USERNAME }}
+          git config --global user.email ${{ env.USER_EMAIL }}
+          git fetch https://github.com/${{ env.REPO }}.git develop
+          git cherry-pick FETCH_HEAD --strategy-option octopus
 
       - name: add modified files
         run: |
@@ -46,12 +49,12 @@ jobs:
           path: internal-repo
           token: ${{ secrets.INTERNAL_TOKEN }}
           body: |
-            AutoPR generated from public repo
-            ${{ env.COMMIT_SHA }}
+            AutoPR generated from public repo (${{ env.PR_NAME }})
+            ${{ env.REPO }}@${{ env.COMMIT_SHA }}
             @${{ env.USERNAME }}
           branch: AutoPR
           branch-suffix: short-commit-hash
           assignees: ${{ env.USERNAME }}
           title: ${{ env.PR_NAME }}
           labels: AutoPR
-          author: ${{ env.USERNAME }} <${{ env.USERNAME }}@users.noreply.github.com>
+          author: ${{ env.USERNAME }} <${{ env.USER_EMAIL }}>
