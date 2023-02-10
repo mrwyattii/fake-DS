@@ -21,3 +21,4 @@ def public_func_2():
     pass
 
 x = 1
+y = 2
