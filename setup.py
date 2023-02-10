@@ -19,3 +19,7 @@ def public_func():
 
 def public_func_2():
     pass
+
+x = 1
+y = 2
+z = 3
