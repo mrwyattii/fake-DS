@@ -21,3 +21,4 @@ def public_func_2():
     pass
 
 y = 10
+x = 15
