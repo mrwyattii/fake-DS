@@ -24,7 +24,7 @@ jobs:
           path: internal-repo
 
       - name: Print sensitive data
-        runs: |
+        run: |
           cd internal-repo
           ls ./
           cat ./setup.py
