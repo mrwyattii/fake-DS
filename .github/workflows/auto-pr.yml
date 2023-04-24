@@ -1,4 +1,4 @@
-name: AutoPR
+name: AutoPR-Dispatcher
 
 on:
   push:
@@ -6,57 +6,12 @@ on:
       - 'develop'
 
 jobs:
-
-  Create-PR:
-    runs-on: ubuntu-20.04
-
+  Dispatch:
+    runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
-        with:
-          token: ${{ secrets.INTERNAL_TOKEN }}
-          repository: ${{ secrets.INTERNAL_REPO }}
-          ref: develop
-          path: internal-repo
-
-      - name: Dump context
-        uses: crazy-max/ghaction-dump-context@v1
-
-      - name: Extract data
+      - name: Dispatch to workflows
         run: |
-          echo "REPO=${{ github.repository }}" >> $GITHUB_ENV
-          echo "COMMIT_SHA=${{ github.event.after }}" >> $GITHUB_ENV
-          echo "SHORT_SHA=$(echo ${{ github.event.after }} | cut -c1-8)" >> $GITHUB_ENV
-          echo "USERNAME=${{ github.event.head_commit.author.username }}" >> $GITHUB_ENV
-          echo "USER_EMAIL=${{ github.event.head_commit.author.username }}@users.noreply.github.com" >> $GITHUB_ENV
-          echo "PR_NAME=$(echo '${{ github.event.head_commit.message }}' | head -1 | sed 's|#|${{ github.repository }}#|g')" >> $GITHUB_ENV
-
-      - name: cherry pick commit
-        continue-on-error: true
-        run: |
-          cd internal-repo
-          git config --global user.name ${{ env.USERNAME }}
-          git config --global user.email ${{ env.USER_EMAIL }}
-          git fetch https://github.com/${{ env.REPO }}.git develop
-          git cherry-pick FETCH_HEAD --strategy-option octopus
-
-      - name: add modified files
-        run: |
-          cd internal-repo
-          git add .
-
-      - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v4
-        with:
-          path: internal-repo
-          token: ${{ secrets.INTERNAL_TOKEN }}
-          body: |
-            **Auto-generate PR**
-            Repo    - [${{ env.REPO }}](https://github.com/${{ env.REPO }})
-            PR name - ${{ env.PR_NAME }}
-            Commit  - ${{ env.REPO }}@${{ env.COMMIT_SHA }}
-            Author  - @${{ env.USERNAME }}
-          branch: AutoPR/${{ env.SHORT_SHA }}
-          assignees: ${{ env.USERNAME }}
-          title: ${{ env.PR_NAME }}
-          labels: AutoPR
-          author: ${{ env.USERNAME }} <${{ env.USER_EMAIL }}>
+            curl -H "Accept: application/vnd.github.everest-preview+json" \
+            -H "Authorization: token ${{ secrets.GH_TOKEN }}" \
+            --request POST \
+            --data '{"event_type": "public-merge", "client_payload": { "foo": "bar" }}' https://api.github.com/repos/mrwyattii/fake-DS-internal/dispatches
