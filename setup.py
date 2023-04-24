@@ -19,6 +19,3 @@ def public_func():
 
 def public_func_2():
     pass
-
-y = 9
-x = 15
