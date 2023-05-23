@@ -1,0 +1,16 @@
+name: Publish distribution to PyPI
+
+on:
+  push:
+    tags:
+     - 'v*.*.*'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-20.04
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Build and publish
+      run: |
+        echo "RELEASE ACTIONS HERE"
