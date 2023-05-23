@@ -1,6 +1,6 @@
 from packaging import version as pkg_version
 
-with open('../version.txt', 'r') as fd:
+with open('./version.txt', 'r') as fd:
         version = pkg_version.parse(fd.read())
 
 with open('./version.txt', 'w') as fd:
