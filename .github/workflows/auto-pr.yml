@@ -14,4 +14,11 @@ jobs:
         run: |
           if [[ "${{ secrets.LAST_COMMIT_PR }}" == "test_value" ]]; then
             echo "SECRET VALUE IS test_value"
+          else
+            echo "SECRET VALUE DID NOT MATCH"
           fi
+      - uses: gliech/create-github-secret-action@v1
+        with:
+          name: LAST_COMMIT_PR
+          value: new_test_value
+          pa_token: ${{ secrets.GH_TOKEN }}
