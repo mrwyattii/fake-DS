@@ -12,7 +12,7 @@ jobs:
     steps:
     - uses: actions/checkout@v3
       with:
-        fetch-depth: 0
+        ref: "develop"
     - name: Get release version from tag
       run: |
           echo "RELEASE_VERSION=${GITHUB_REF#refs/*/:1}" >> $GITHUB_ENV
