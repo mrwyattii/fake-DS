@@ -10,14 +10,8 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-      - uses: actions/download-artifact@v3
-        with:
-          name: last-commit
-      - name: Create Artifact
+      - name: Print and Update Secret
         run: |
-          ls .
-          echo "test commit val" > commit.txt
-      - uses: actions/upload-artifact@v3
-        with:
-          name: last-commit
-          path: ./commit.txt
+          if [[ "${{ secrets.LAST_COMMIT_PR }}" == "test_value" ]]; then
+            echo "SECRET VALUE IS test_value"
+          fi
