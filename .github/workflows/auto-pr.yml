@@ -24,7 +24,7 @@ jobs:
       runs-on: ubuntu-latest
       strategy:
         matrix:
-          commit: [1, 2, 3]
+          commit: git rev-list b7574192d05afdf2bcc3f277494e538b75406704..HEAD
       steps:
         - name: List Commits
           run: |
