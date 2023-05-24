@@ -19,9 +19,4 @@ jobs:
           else
             echo "SECRET VALUE DID NOT MATCH"
           fi
-          gh secret set LAST_COMMIT_PR --body "test_value_2"
-      - uses: gliech/create-github-secret-action@v1
-        with:
-          name: LAST_COMMIT_PR
-          value: new_test_value
-          pa_token: ${{ secrets.GH_TOKEN }}
+          gh secret set LAST_COMMIT_PR --body "test_value"
