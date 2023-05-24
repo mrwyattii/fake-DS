@@ -29,6 +29,7 @@ jobs:
       run: |
         git config --global user.name 'mrwyattii'
         git config --global user.email 'mrwyattii@users.noreply.github.com'
+        git checkout develop
         git add version.txt
         git commit -m "Release v${{ env.RELEASE_VERSION }}"
-        git push origin develop --force
+        git push
