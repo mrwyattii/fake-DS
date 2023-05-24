@@ -1,4 +1,4 @@
-name: AutoPR-Dispatcher
+name: AutoPR
 
 on:
   push:
@@ -9,22 +9,11 @@ jobs:
   Dispatch:
     runs-on: ubuntu-latest
     steps:
-      - name: Dispatch to workflows
+      - uses: actions/checkout@v3
+      - name: Create Artifact
         run: |
-            curl -H "Accept: application/vnd.github.everest-preview+json" \
-            -H "Authorization: token ${{ secrets.GH_TOKEN }}" \
-            --request POST \
-            --data '{"event_type": "public-merge", "client_payload": { "foo": "bar" }}' https://api.github.com/repos/mrwyattii/fake-DS-internal/dispatches
-
-      - uses: actions/checkout@v2
+          echo "test commit val" > commit.txt
+      - uses: actions/upload-artifact@v3
         with:
-          token: ${{ secrets.GH_TOKEN }}
-          repository: ${{ secrets.GH_REPO }}
-          ref: develop
-          path: internal-repo
-
-      - name: Print sensitive data
-        run: |
-          cd internal-repo
-          ls ./
-          cat ./setup.py
+          name: last-commit
+          path: ./commit.txt
