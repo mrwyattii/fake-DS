@@ -15,7 +15,7 @@ jobs:
         ref: "develop"
     - name: Get release version from tag
       run: |
-          echo "RELEASE_VERSION=${GITHUB_REF#refs/*/:1}" >> $GITHUB_ENV
+          echo "RELEASE_VERSION=${GITHUB_REF#refs/*/}" >> $GITHUB_ENV
     - name: Set release version in file
       run: |
         echo ${{ env.RELEASE_VERSION }} > version.txt
@@ -29,7 +29,6 @@ jobs:
       run: |
         git config --global user.name 'mrwyattii'
         git config --global user.email 'mrwyattii@users.noreply.github.com'
-        git checkout develop
         git add version.txt
         git commit -m "Release v${{ env.RELEASE_VERSION }}"
         git push
