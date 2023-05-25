@@ -37,7 +37,7 @@ jobs:
       needs: CreateMatrix
       strategy:
         matrix:
-          commit: ${{needs.CreateMatrix.outputs.commits}}
+          commit: ${{fromJSON(needs.CreateMatrix.outputs.commits)}}
       steps:
         - name: List Commits
           run: |
