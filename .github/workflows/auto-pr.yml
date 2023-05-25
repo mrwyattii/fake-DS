@@ -12,6 +12,7 @@ jobs:
     outputs:
       commits: ${{ steps.step1.outputs.commits }}
     steps:
+      - uses: actions/checkout@v3
       - id: step1
         run: |
           echo "commits=$(git rev-list b7574192d05afdf2bcc3f277494e538b75406704..HEAD | python3 -c 'import sys; print([l.strip() for l in sys.stdin]);')" >> "$GITHUB_OUTPUT"
@@ -35,7 +36,7 @@ jobs:
       needs: CreateMatrix
       strategy:
         matrix:
-          commit: ${{needs.CreateMatrix.outputs.commits}}
+          commit: ${{fromJSON(needs.CreateMatrix.outputs.commits)}}
       steps:
         - name: List Commits
           run: |
