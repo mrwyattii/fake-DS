@@ -13,7 +13,7 @@ jobs:
       commits: ${{ steps.get_commits.outputs.commits }}
     steps:
       - uses: actions/checkout@v3
-      - name: get_commits
+      - id: get_commits
         run: |
             #echo "commits=$(git rev-list b7574192d05afdf2bcc3f277494e538b75406704..HEAD | python3 -c 'import sys; print([l.strip() for l in sys.stdin]);')" >> "$GITHUB_OUTPUT"
             echo "commits=['871c85ff6a9616e532c5e951d63a51ba0641c7d1', '6cd8f5ec623904ce98b76eacba2f6847fced45f2', '3b8191cbd3ebb8fb46cd03d894ec576298cf86ea']" >> "$GITHUB_OUTPUT"
