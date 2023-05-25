@@ -8,6 +8,15 @@ on:
 jobs:
   CreateMatrix:
     runs-on: ubuntu-latest
+    # Map a step output to a job output
+    outputs:
+      commits: ${{ steps.step1.outputs.commits }}
+    steps:
+      - id: step1
+        run: |
+          echo "commits=$(git rev-list b7574192d05afdf2bcc3f277494e538b75406704..HEAD | python3 -c 'import sys; print([l.strip() for l in sys.stdin]);')" >> "$GITHUB_OUTPUT"
+  UpdateSecret:
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
       - name: Print and Update Secret
@@ -23,9 +32,10 @@ jobs:
           echo "MATRIX=$(git rev-list b7574192d05afdf2bcc3f277494e538b75406704..HEAD | python3 -c 'import sys; print([l.strip() for l in sys.stdin]);')" >> $GITHUB_ENV
   CreatePRs:
       runs-on: ubuntu-latest
+      needs: CreateMatrix
       strategy:
         matrix:
-          commit: ${{ env.MATRIX }}
+          commit: ${{needs.CreateMatrix.outputs.commits}}
       steps:
         - name: List Commits
           run: |
