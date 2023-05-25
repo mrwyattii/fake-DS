@@ -6,7 +6,7 @@ on:
       - 'develop'
 
 jobs:
-  SetSecret:
+  CreateMatrix:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -20,11 +20,12 @@ jobs:
             echo "SECRET VALUE DID NOT MATCH"
           fi
           gh secret set LAST_COMMIT_PR --body "test_value"
+          echo "MATRIX=$(git rev-list b7574192d05afdf2bcc3f277494e538b75406704..HEAD | python3 -c 'import sys; print([l.strip() for l in sys.stdin]);')" >> $GITHUB_ENV
   CreatePRs:
       runs-on: ubuntu-latest
       strategy:
         matrix:
-          commit: git rev-list b7574192d05afdf2bcc3f277494e538b75406704..HEAD
+          commit: ${{ env.MATRIX }}
       steps:
         - name: List Commits
           run: |
