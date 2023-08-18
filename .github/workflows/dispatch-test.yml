@@ -21,7 +21,7 @@ jobs:
       - uses: actions/checkout@v3
 
       - name: Print vars
-		run: |
+        run: |
           echo "DSE Branch: $BRANCH"
           echo "WORKFLOW_DISPATCH: $WORKFLOW_DISPATCH"
         env:
