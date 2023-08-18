@@ -27,9 +27,11 @@ jobs:
         run: |
           echo "DSE Branch: $BRANCH"
           echo "WORKFLOW_DISPATCH: $WORKFLOW_DISPATCH"
+          echo "EVENT_CONTEXT: $EVENT_CONTEXT"
         env:
           BRANCH: ${{ inputs.dse_branch }}
           WORKFLOW_DISPATCH: ${{ github.event.workflow_dispatch }}
+          EVENT_CONTEXT: ${{ toJSON(github.event) }}
 
       - name: DS-Chat unit tests
         run: |
