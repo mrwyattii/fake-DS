@@ -1,0 +1,34 @@
+name: nv-ds-chat
+
+on:
+  workflow_dispatch:
+    inputs:
+      dse_branch:
+        description: 'DeepSpeedExamples Branch'
+        required: false
+        default: 'master'
+        type: string
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  unit-tests:
+    runs-on: [self-hosted, nvidia, cu116, v100]
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Print vars
+		run: |
+          echo "DSE Branch: $BRANCH"
+          echo "WORKFLOW_DISPATCH: $WORKFLOW_DISPATCH"
+        env:
+          BRANCH: ${{ inputs.dse_branch }}
+          WORKFLOW_DISPATCH: ${{ github.event.workflow_dispatch }}
+
+      - name: DS-Chat unit tests
+        run: |
+          git clone -b ${{ github.event.inputs.dse_branch }} https://github.com/microsoft/DeepSpeedExamples.git
+
