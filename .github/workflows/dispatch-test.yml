@@ -39,4 +39,5 @@ jobs:
           if [[ ! -z "${{ github.event.inputs.dse_branch }}" ]]; then
               BRANCH="${{ github.event.inputs.dse_branch }}"
           fi
+          echo "BRANCH: $BRANCH"
           git clone -b $BRANCH https://github.com/microsoft/DeepSpeedExamples.git
