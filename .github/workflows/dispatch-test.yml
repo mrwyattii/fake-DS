@@ -3,7 +3,7 @@ name: nv-ds-chat
 on:
   push:
     branches:
-      - master
+      - develop
   workflow_dispatch:
     inputs:
       dse_branch:
