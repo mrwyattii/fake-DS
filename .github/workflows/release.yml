@@ -19,9 +19,17 @@ jobs:
     - name: Set release version in file
       run: |
         echo ${{ env.RELEASE_VERSION }} > version.txt
-    - name: Build and publish
+    - name: Install dependencies
       run: |
-        echo "RELEASE ACTIONS HERE"
+        python -m pip install --upgrade pip
+        pip install setuptools wheel twine
+    - name: Build and publish
+      env:
+        TWINE_USERNAME: ${{ secrets.PYPI_USERNAME }}
+        TWINE_PASSWORD: ${{ secrets.PYPI_PASSWORD }}
+      run: |
+        DS_BUILD_STRING="" python setup.py sdist
+        twine upload dist/*
     - name: Bump patch version
       run: |
         python3 scripts/bump-version.py
