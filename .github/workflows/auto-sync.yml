@@ -11,6 +11,7 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+        token: ${{ secrets.GH_TOKEN }}
 
       - name: Sync branches
         run: |
