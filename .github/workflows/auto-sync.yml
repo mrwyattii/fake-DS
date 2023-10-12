@@ -1,0 +1,21 @@
+name: auto-sync
+
+on:
+  schedule:
+    - cron: "0 * * * *"
+
+jobs:
+  sync:
+    runs-on: ubuntu-20.04
+    environment: sync-env
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Sync branches
+        run: |
+          git remote add upstream https://github.com/microsoft/DeepSpeed.git
+          git fetch upstream
+          git checkout master
+          git rebase upstream/master
+          git push origin master
