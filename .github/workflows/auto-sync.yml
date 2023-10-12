@@ -15,7 +15,7 @@ jobs:
 
       - name: Sync branches
         run: |
-          git remote add upstream https://github.com/microsoft/DeepSpeed.git
+          git remote add upstream https://github.com/mrwyattii/fake-DS.git
           git fetch upstream
           git checkout master
           git rebase upstream/master
