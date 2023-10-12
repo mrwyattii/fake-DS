@@ -12,7 +12,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          token: ${{ secrets.GH_TOKEN || github.token }}
+          token: "${{ secrets.GH_TOKEN || github.token }}"
 
       - name: Sync branches
         if: ${{ github.repository }} != "mrwyattii/fake-DS"
