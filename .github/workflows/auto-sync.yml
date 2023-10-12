@@ -15,6 +15,7 @@ jobs:
           token: ${{ secrets.GH_TOKEN }}
 
       - name: Sync branches
+        if: ${{ github.repository }} != "mrwyattii/fake-DS"
         run: |
           git remote add upstream https://github.com/mrwyattii/fake-DS.git
           git fetch upstream
